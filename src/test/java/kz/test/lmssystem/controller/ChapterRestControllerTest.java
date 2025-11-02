@@ -2,9 +2,7 @@ package kz.test.lmssystem.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kz.test.lmssystem.dto.ChapterDto;
-import kz.test.lmssystem.dto.CourseDto;
 import kz.test.lmssystem.entity.Chapter;
-import kz.test.lmssystem.entity.Course;
 import kz.test.lmssystem.exception.ResourceNotFoundException;
 import kz.test.lmssystem.mapper.ChapterMapper;
 import kz.test.lmssystem.service.ChapterService;
