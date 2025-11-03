@@ -1,6 +1,7 @@
 package kz.test.lmssystem.service.impl;
 
 import kz.test.lmssystem.entity.Chapter;
+import kz.test.lmssystem.exception.ResourceNotFoundException;
 import kz.test.lmssystem.repository.ChapterRepository;
 import kz.test.lmssystem.service.ChapterService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,12 @@ public class ChapterServiceImpl implements ChapterService {
 
     @Override
     public Chapter getChapterById(Long id) {
-        return chapterRepository.findById(id).get();
+        log.info("Fetching chapter by id: {}", id);
+        return chapterRepository.findById(id)
+                .orElseThrow(() -> {
+                    log.error("Chapter with id {} not found", id);
+                    return new ResourceNotFoundException("Chapter", id);
+                });
     }
 
     @Override

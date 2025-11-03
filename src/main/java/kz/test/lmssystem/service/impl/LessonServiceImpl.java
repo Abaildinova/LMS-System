@@ -2,6 +2,7 @@ package kz.test.lmssystem.service.impl;
 
 
 import kz.test.lmssystem.entity.Lesson;
+import kz.test.lmssystem.exception.ResourceNotFoundException;
 import kz.test.lmssystem.repository.LessonRepository;
 import kz.test.lmssystem.service.LessonService;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,12 @@ public class LessonServiceImpl implements LessonService {
 
     @Override
     public Lesson getLessonById(Long id) {
-        return lessonRepository.findById(id).get();
+        log.info("Fetching lesson by id: {}", id);
+        return lessonRepository.findById(id)
+                .orElseThrow(() -> {
+                    log.error("Lesson with id {} not found", id);
+                    return new ResourceNotFoundException("Lesson", id);
+                });
     }
 
     @Override

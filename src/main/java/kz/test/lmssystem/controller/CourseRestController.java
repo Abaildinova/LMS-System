@@ -129,7 +129,7 @@ public class CourseRestController {
     @DeleteMapping(value = "/{id}")
     public ResponseEntity <Void> deleteCourse(
             @Parameter(description = "id of the course to delete", required = true)
-            @RequestParam Long id) {
+            @PathVariable Long id) {
         log.info("REST request to delete course with id: {}", id);
         courseService.deleteCourseById(id);
         return ResponseEntity.noContent().build();
